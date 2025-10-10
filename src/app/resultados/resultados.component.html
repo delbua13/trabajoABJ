@@ -1,16 +1,18 @@
+
 <div class="resultado-container">
     <h1 class="titulo-juego">🎮 ¡Gracias por jugar, {{ nombreJugador }}!</h1>
     <h2>Puntuación final: {{ puntuacion }}</h2>
   
     <div class="historial">
-      <h3>Frases completadas:</h3>
+      <h3>Preguntas y respuestas:</h3>
       <ul>
-        <li *ngFor="let frase of frasesAcertadas; let i = index">
-          {{ i + 1 }}. {{ frase }}
+        <li *ngFor="let pregunta of preguntas; let i = index">
+          <strong>{{ i + 1 }}. {{ pregunta }}</strong><br>
+          <span class="respuesta">{{ soluciones[i] }}</span>
         </li>
       </ul>
     </div>
   
     <button class="btn-jugar" (click)="volverAJugar()">🔄 Volver a jugar</button>
-  </div>
+</div>
   

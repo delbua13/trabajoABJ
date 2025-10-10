@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
+import { BaseDeDatosService } from '../services/base-de-datos.service';
 
 @Component({
   selector: 'app-resultados',
@@ -13,17 +14,17 @@ export class ResultadosComponent implements OnInit {
 
   nombreJugador: string = '';
   puntuacion: number = 0;
-  frasesAcertadas: string[] = [];
+  soluciones: string[] = [];
+  preguntas: string[] = [];
 
-  constructor(private cookieService: CookieService, private router: Router) {}
+  constructor(private cookieService: CookieService, private router: Router, private baseDeDatosService:BaseDeDatosService) {}
 
   ngOnInit(): void {
     // Leer datos desde cookies
     this.nombreJugador = this.cookieService.get('nombreJugador') || 'Jugador';
     this.puntuacion = Number(this.cookieService.get('puntuacion')) || 0;
-    this.frasesAcertadas = this.cookieService.check('frasesAcertadas')
-      ? JSON.parse(this.cookieService.get('frasesAcertadas'))
-      : [];
+    this.soluciones = this.baseDeDatosService.getEjercicios();
+    this.preguntas = this.baseDeDatosService.getTitulosPreguntas();
   }
 
   volverAJugar(): void {
