@@ -23,7 +23,7 @@ export class EjerciciosComponent implements OnInit {
   titulos: string[] = [];
   ejercicioActual: string = '';
   indiceEjercicio: number = 0;
-  particionFrase: number = 8;
+  private readonly particionFrase: number = 5;
 
   partesEjercicio: ParteEjercicio[] = [];
   ordenUsuario: string = '';
@@ -58,36 +58,44 @@ export class EjerciciosComponent implements OnInit {
   }
 
   private generarNumerosAleatorios(): number[] {
-    const numeros = [1, 2, 3, 4, 5, 6, 7, 8];
+    const numeros = Array.from({ length: this.particionFrase }, (_, i) => i + 1);
     for (let i = numeros.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [numeros[i], numeros[j]] = [numeros[j], numeros[i]];
     }
+  
     return numeros;
   }
 
   inicializarEjercicio() {
     this.ordenUsuario = '';
-    const texto = this.ejercicioActual;
-    const longitudTotal = texto.length;
-    const tamañoParte = Math.ceil(longitudTotal / this.particionFrase);
-
+    const texto = this.ejercicioActual.trim();
+  
+    // Dividimos la frase en palabras
+    const palabras = texto.split(' ');
+    const totalPalabras = palabras.length;
+  
+    // Calculamos cuántas palabras por parte (aproximadamente)
+    const palabrasPorParte = Math.ceil(totalPalabras / this.particionFrase);
+  
     const partes: ParteEjercicio[] = [];
-    let inicio = 0;
-
-    for (let i = 0; i < this.particionFrase; i++) {
-      const fin = Math.min(inicio + tamañoParte, longitudTotal);
-      const fragmento = texto.slice(inicio, fin);
+    let indice = 0;
+  
+    for (let i = 0; i < this.particionFrase && indice < totalPalabras; i++) {
+      const fin = Math.min(indice + palabrasPorParte, totalPalabras);
+      const fragmento = palabras.slice(indice, fin).join(' ') + ' ';
       partes.push({ texto: fragmento, numero: 0 });
-      inicio = fin;
+      indice = fin;
     }
 
     const numerosAleatorios = this.generarNumerosAleatorios();
+
     partes.forEach((parte, idx) => parte.numero = numerosAleatorios[idx]);
     partes.sort((a, b) => a.numero - b.numero);
-
+  
     this.partesEjercicio = partes;
   }
+  
 
   verificarOrden(intento: string) {
     if (intento.trim() === this.ejercicioActual.trim()) {
