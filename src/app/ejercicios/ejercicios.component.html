@@ -1,0 +1,52 @@
+
+<div class="cabecera">
+  <h2>Ejercicio {{ indiceEjercicio + 1 }}</h2>
+  <h3>{{ titulos.at(indiceEjercicio) }}</h3>
+
+  <div
+    class="puntuacion"
+    [ngClass]="{
+      'bloque-positivo': puntuacion > 0,
+      'bloque-negativo': puntuacion < 0,
+      'bloque-neutro': puntuacion === 0
+    }"
+  >
+    Puntuación: {{ puntuacion }}
+  </div>
+</div>
+
+<div class="bloques">
+  <div
+    class="bloque"
+    *ngFor="let parte of partesEjercicio"
+    (click)="agregarTexto(parte)"
+  >
+    <strong>{{ parte.numero }}</strong> {{ parte.texto }}
+  </div>
+</div>
+
+<div class="orden-usuario">
+  <label for="orden">Escribe la frase completa en el orden correcto:</label>
+  <input
+    #ordenInput
+    id="orden"
+    type="text"
+    [(ngModel)]="ordenUsuario"
+    placeholder="Haz clic en los bloques o escribe aquí"
+  >
+
+  <div class="botones">
+    <button (click)="verificarOrden(ordenUsuario)">Verificar</button>
+    <button class="siguiente" (click)="pasarSiguienteEjercicio()">➡️ Siguiente</button>
+  </div>
+</div>
+
+<!-- Historial de frases acertadas -->
+<div class="historial" *ngIf="frasesAcertadas.length > 0">
+  <h3>Frases:</h3>
+  <ul>
+    <li *ngFor="let frase of frasesAcertadas; let i = index">
+      {{ i + 1 }}. {{ frase }}
+    </li>
+  </ul>
+</div>

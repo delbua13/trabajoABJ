@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap');
+
+:host {
+    display: flex;
+    justify-content: center;  /* Centrado horizontal */
+    align-items: center;      /* Centrado vertical */
+    width: 100%;
+    height: 100vh;            /* Ocupa toda la altura de la pantalla */
+    background: #0a1428;      /* Fondo opcional */
+    overflow: hidden;         /* Evita scroll */
+  }
+.resultado-container {
+  position: fixed;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 40px 30px;
+  text-align: center;
+  background: rgba(20,20,40,0.85);
+  border: 2px solid #00ffc8;
+  border-radius: 20px;
+  box-shadow: 0 0 25px #00ffc8a4;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 1.5s ease-out;
+}
+
+.titulo-juego {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #00ffc8;
+  text-shadow: 0 0 10px #00ffc8, 0 0 20px #00a2ff;
+  margin-bottom: 15px;
+  animation: parpadeo 2s infinite;
+}
+
+h2 {
+  color: #b8ffe0;
+  margin-bottom: 25px;
+}
+
+.historial {
+  background: rgba(10,20,40,0.7);
+  border: 2px solid #00a2ff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.historial::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.historial h3 {
+  color: #00ffc8;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 10px;
+}
+
+.historial ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.historial li {
+  margin: 6px 0;
+  background: rgba(0,255,200,0.05);
+  border-left: 3px solid #00ffc8;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #b8ffe0;
+}
+
+.btn-jugar {
+  background: linear-gradient(90deg, #00ffc8, #00a2ff);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 12px;
+  color: #000;
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px #00ffc8a4;
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-jugar:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px #00ffc8, 0 0 50px #00a2ff;
+}
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .resultado-container {
+    padding: 25px 15px;
+  }
+  .titulo-juego {
+    font-size: 1.6rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+  }
+  .btn-jugar {
+    width: 100%;
+    font-size: 1rem;
+  }
+}

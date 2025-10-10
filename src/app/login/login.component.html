@@ -1,0 +1,26 @@
+<!-- Fondo dinámico -->
+<div class="neon-bg"></div>
+
+<!-- Contenido principal -->
+<div class="login-wrapper">
+  <div class="login-container">
+    <h1 class="titulo-juego">🕹️ WordMaster</h1>
+    <h2>Bienvenido</h2>
+
+    <form (ngSubmit)="comenzar()" autocomplete="off">
+      <label for="nombre">Tu nombre:</label>
+      <input
+        type="text"
+        id="nombre"
+        [(ngModel)]="nombre"
+        name="nombre"
+        placeholder="Escribe tu nombre de jugador..."
+        required
+      />
+
+      <button type="submit" class="btn-jugar">🎮 Comenzar</button>
+    </form>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
