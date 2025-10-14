@@ -231,6 +231,10 @@ export class EjerciciosComponent implements OnInit {
   randomDelay() {
     return Math.random() * 8;
   }
+
+  limpiarOrden() {
+    this.ordenUsuario = "";
+  }
  
   
 }

@@ -27,17 +27,18 @@
 
 <div class="orden-usuario">
   <label for="orden">Escribe la frase completa en el orden correcto:</label>
-  <input
+  <textarea
     #ordenInput
     id="orden"
     type="text"
     [(ngModel)]="ordenUsuario"
     placeholder="Haz clic en los bloques o escribe aquí"
-  >
+  ></textarea>
 
   <div class="botones">
+    <button (click)="limpiarOrden()">Limpiar</button>
     <button (click)="verificarOrden(ordenUsuario)">Verificar</button>
-    <button class="siguiente" (click)="pasarSiguienteEjercicio()">➡️ Siguiente</button>
+    <button class="siguiente" (click)="pasarSiguienteEjercicio()">Rendirse</button>
   </div>
 </div>
 

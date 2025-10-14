@@ -129,9 +129,10 @@ body {
   margin-bottom: 10px;
 }
 
-.orden-usuario input {
+.orden-usuario textarea {
   width: 100%;
-  padding: 10px;
+  min-height: 60px;
+  padding: 12px;
   border: 2px solid #00ffc8;
   border-radius: 10px;
   background: rgba(10, 20, 40, 0.7);
@@ -139,13 +140,21 @@ body {
   font-size: 1rem;
   text-align: center;
   outline: none;
+  resize: vertical; /* permite agrandarlo manualmente */
   transition: all 0.3s ease;
+
+  scrollbar-width: none;
 }
 
-.orden-usuario input:focus {
+.orden-usuario textarea:focus {
   box-shadow: 0 0 15px #00ffc8;
   transform: scale(1.02);
 }
+
+.orden-usuario textarea::-webkit-scrollbar {
+  display: none;                
+}
+
 
 /* --- BOTONES --- */
 .botones {
@@ -232,7 +241,7 @@ button.siguiente {
     width: 100%;
   }
 
-  .orden-usuario input {
+  .orden-usuario textarea {
     font-size: 0.9rem;
   }
 
