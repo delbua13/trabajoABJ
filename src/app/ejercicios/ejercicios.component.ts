@@ -5,10 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { UsuariosService } from '../services/usuarios.service';
 
 interface ParteEjercicio {
   texto: string;
   numero: number;
+}
+
+export interface Usuario {
+  id?: number;
+  name: string;
+  score: number;
 }
 
 @Component({
@@ -28,6 +35,8 @@ export class EjerciciosComponent implements OnInit {
   partesEjercicio: ParteEjercicio[] = [];
   ordenUsuario: string = '';
 
+  name:string = '';
+
   puntuacion: number = 0;
   frasesAcertadas: string[] = [];
 
@@ -36,7 +45,8 @@ export class EjerciciosComponent implements OnInit {
   constructor(
     private baseDeDatosService: BaseDeDatosService,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private usuariosService: UsuariosService
   ) {}
 
   ngOnInit() {
@@ -46,6 +56,7 @@ export class EjerciciosComponent implements OnInit {
     // Leer cookies
     this.indiceEjercicio = Number(this.cookieService.get('indice')) || 0;
     this.puntuacion = Number(this.cookieService.get('puntuacion')) || 0;
+    this.name = String(this.cookieService.get('nombreJugador')) || "";
     this.frasesAcertadas = this.cookieService.check('frasesAcertadas')
       ? JSON.parse(this.cookieService.get('frasesAcertadas'))
       : [];
@@ -200,7 +211,21 @@ export class EjerciciosComponent implements OnInit {
         confirmButtonColor: '#4CAF50'
       }).then((result) => {
         if (result.isConfirmed || result.isDismissed) {
-          this.router.navigate(['/resultados']);
+          const usuario = {
+            name: this.name,
+            score: this.puntuacion
+          };
+
+          this.usuariosService.crearUsuario(usuario).subscribe({
+            next: (res) => {
+              console.log('✅ Usuario guardado en Supabase:', res);
+              this.router.navigate(['/resultados']);
+            },
+            error: (err) => {
+              console.error('❌ Error al guardar usuario:', err);
+              Swal.fire('Error', 'No se pudo guardar el usuario en la base de datos.', 'error');
+            }
+          });
         }
       });
     }
