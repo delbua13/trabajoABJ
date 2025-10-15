@@ -1,0 +1,83 @@
+.tabla-usuarios {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: 0 0 20px rgba(0,255,200,0.2);
+  }
+  
+  .tabla-usuarios table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Rajdhani', sans-serif;
+    color: #b8ffe0;
+  }
+  
+  .tabla-usuarios th,
+  .tabla-usuarios td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,255,200,0.2);
+    background: rgba(10,20,40,0.6);
+    border-radius: 8px; /* Opcional, suaviza los bordes de cada celda */
+  }
+  
+  .tabla-usuarios thead th {
+    background: rgba(0,255,200,0.15);
+    text-shadow: 0 0 5px #00ffc8;
+  }
+  
+  .tabla-usuarios tbody tr:hover td {
+    background: rgba(0,255,200,0.2);
+    box-shadow: 0 0 15px #00ffc8;
+  }
+  
+  .tabla-usuarios th {
+    font-family: 'Orbitron', sans-serif;
+    color: #00ffc8;
+    text-transform: uppercase;
+  }
+  .cabecera-admin {
+    text-align: center;
+    margin-bottom: 30px;
+    margin: 60px auto 30px;
+    position: relative;
+    animation: fadeIn 1.5s ease-out;
+  }
+  
+  .cabecera-admin h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: #00ffc8;
+    text-shadow:
+      0 0 10px #00ffc8,
+      0 0 20px #00a2ff,
+      0 0 30px #00ffea,
+      0 0 40px #00ffc8;
+    letter-spacing: 2px;
+    display: inline-block;
+    position: relative;
+    padding: 10px 20px;
+    border: 2px solid #00ffc8;
+    border-radius: 12px;
+    background: rgba(10, 20, 40, 0.7);
+    box-shadow: 0 0 20px rgba(0,255,200,0.4);
+  }
+  
+  /* Efecto de animación de brillo */
+  @keyframes glow {
+    0% {
+      text-shadow: 0 0 10px #00ffc8, 0 0 20px #00a2ff;
+    }
+    50% {
+      text-shadow: 0 0 20px #00ffc8, 0 0 40px #00a2ff, 0 0 60px #00ffea;
+    }
+    100% {
+      text-shadow: 0 0 10px #00ffc8, 0 0 20px #00a2ff;
+    }
+  }
+  
+  .cabecera-admin h2 {
+    animation: glow 2s infinite alternate;
+  }
+  
