@@ -18,7 +18,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.usuariosService.obtenerUsuarios().subscribe({
       next: (data: Usuario[]) => {
-        this.usuarios = data;
+        this.usuarios = data.sort((a, b) => b.score - a.score);
       },
       error: (err) => {
         console.error('Error al cargar usuarios:', err);
